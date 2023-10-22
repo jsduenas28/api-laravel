@@ -53,20 +53,25 @@ class UserController extends Controller
      */
     public function loginUser(Request $request)
     {
-        if(!Auth::attempt($request->only('email', 'password'))) {
-            return response()->json(['message' => 'No autorizado'], 404);
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::validate($credentials)) {
+            if ($user = Auth::getLastAttempted()) {
+                Auth::login($user);
+                $token = $user->createToken('auth_token')->plainTextToken;
+
+                return response()->json([
+                    'message' => 'Hola '.$user->name,
+                    'accessToken' => $token,
+                    'token_type' => 'Bearer',
+                    'user' => $user
+                ]);
+            }
         }
 
-        $user = User::where('email', $request['email'])->firstOrFail();
-
-        $token = $user->createToken('auth_token')->plainTextToken;
-
         return response()->json([
-            'message' => 'Hola '.$user->name,
-            'accessToken' => $token,
-            'token_type' => 'Bearer',
-            'user' => $user
-        ]);
+            'message' => 'Inicio de sesión fallido. Verifica tus credenciales e intenta nuevamente.'
+        ], 401); // Código 401 para "No autorizado"
     }
 
     public function logoutUser() {
