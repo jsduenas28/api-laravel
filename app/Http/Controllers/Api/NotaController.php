@@ -38,9 +38,14 @@ class NotaController extends Controller
      */
     public function edit($id)
     {
-        $nota = Nota::where('id', $id)->get();
+        $nota = Nota::where('id', $id)->first();
 
-        return $nota;
+        $fecha = $nota->updated_at->format('Y-m-d');
+
+        return response()->json([
+            'nota' => $nota,
+            'fecha' => $fecha
+        ]);
     }
 
     /**
