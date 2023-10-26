@@ -53,4 +53,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     //Generador de Cuestionarios
     Route::get('/genCuestionario/{id}', 'App\Http\Controllers\Api\GPTController@genCuestionario');
+
+    // Busqueda avanzada
+    Route::get('/busquedaCarpeta/{id}', 'App\Http\Controllers\Api\BusquedaController@busquedaCarpeta');
+    Route::post('/busquedaPalabraClave', 'App\Http\Controllers\Api\BusquedaController@busquedaPalabraClave');
+    Route::post('/busquedaFecha', 'App\Http\Controllers\Api\BusquedaController@busquedaFecha');
 });
