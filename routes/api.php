@@ -58,4 +58,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/busquedaCarpeta/{id}', 'App\Http\Controllers\Api\BusquedaController@busquedaCarpeta');
     Route::post('/busquedaPalabraClave', 'App\Http\Controllers\Api\BusquedaController@busquedaPalabraClave');
     Route::post('/busquedaFecha', 'App\Http\Controllers\Api\BusquedaController@busquedaFecha');
+
+    // Resultados Estadisticos
+    Route::get('/resEstadisticos/index', 'App\Http\Controllers\Api\ResEstadisticosController@index');
+    Route::post('/resEstadisticos/store', 'App\Http\Controllers\Api\ResEstadisticosController@store');
+    Route::get('/resEstadisticos/cuestionario/{id}', 'App\Http\Controllers\Api\ResEstadisticosController@cuestionario');
+    Route::delete('/resEstadisticos/delete/{id}', 'App\Http\Controllers\Api\ResEstadisticosController@delete');
 });
