@@ -17,7 +17,7 @@ class GPTController extends Controller
             'headers' => [
                 'Content-Type' => 'application/json',
                 'api-key' => 'sk20YuH47nKzolYdmxdHDz30CAv58eD',
-                'request-type' => 'test'
+                //'request-type' => 'test'
             ],
             'json' => [
                 "type" => "contextBased",
